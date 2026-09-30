@@ -94,22 +94,6 @@ export const organizationSchema: FormSchema = {
   ],
 };
 
-export const confirmationSchema: FormSchema = {
-  id: "confirmation",
-  title: "Confirmation",
-  description: "Review the details and confirm your access request",
-  fields: [
-    {
-      name: "confirmed",
-      label:
-        "I confirm that the details above are correct and I am authorised to access the NCM 2.0 MIS-MRV Portal.",
-      type: "checkbox",
-      required: true,
-      span: "full",
-    },
-  ],
-};
-
 export const emptyDraft = (): OnboardingDraft => ({
   fullName: "",
   designation: "",

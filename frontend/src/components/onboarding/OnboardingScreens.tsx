@@ -9,7 +9,6 @@ import { LoadingState } from "@/components/ui/Feedback";
 import { useSessionGuard } from "@/lib/use-session";
 import { labelFor, pickValues, type FormFieldSchema, type FormSchema } from "@/schemas/form";
 import {
-  confirmationSchema,
   isOrganizationComplete,
   isPersonalComplete,
   organizationSchema,
@@ -132,29 +131,56 @@ export function OrganizationStep() {
 export function ConfirmationStep() {
   const router = useRouter();
   const { draft, error } = useDraft(confirmationReady, "/onboarding");
-  const defaults = useMemo(() => (draft ? pickValues(confirmationSchema.fields, draft) : null), [draft]);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+
+  async function completeOnboarding() {
+    setSubmitError("");
+    setSubmitting(true);
+    try {
+      await saveOnboardingStep({ confirmed: "yes" });
+      const receipt = await submitOnboarding();
+      router.push(`/dashboard?welcome=${receipt.referenceId}`);
+    } catch (caught) {
+      setSubmitError(caught instanceof Error ? caught.message : "Unable to submit your access request.");
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
   return (
-    <OnboardingFrame step={3} title="Review & confirm" lede="Check your details before submitting the access request.">
+    <OnboardingFrame step={3} title="Let's get started!" lede="Provide your basic details to set up your account on the NCM 2.0 MIS-MRV Portal">
       {error ? <p className="form-error">{error}</p> : null}
-      {!draft || !defaults ? <LoadingState label="Preparing your review…" /> : (
-        <>
-          <ReviewCard title="Your Details" editHref="/onboarding" fields={personalDetailsSchema.fields} draft={draft} />
-          <ReviewCard title="Organization & Role" editHref="/onboarding/organization" fields={organizationSchema.fields} draft={draft} />
-          <section className="form-card">
-            <h2>Confirmation</h2>
-            <p className="card-copy">Submit the request to the MIS-MRV Portal.</p>
-            <DynamicForm schema={confirmationSchema} defaultValues={defaults} submitLabel="Confirm" cancelLabel="Back" onCancel={() => router.push("/onboarding/organization")} onSubmit={async (values) => { await saveOnboardingStep(values); const receipt = await submitOnboarding(); router.push(`/dashboard?welcome=${receipt.referenceId}`); }} />
-          </section>
-        </>
+      {!draft ? <LoadingState label="Preparing your review…" /> : (
+        <section className="confirmation-panel" aria-labelledby="confirmation-title">
+          <h2 id="confirmation-title" className="confirmation-title">Review &amp; Confirm</h2>
+          <p className="card-copy">Please review your details before completing the onboarding process. you can go back and make changes if needed.</p>
+          {submitError ? <p className="form-error" role="alert">{submitError}</p> : null}
+          <div className="review-grid">
+            <ReviewCard variant="personal" title="Your Details" editHref="/onboarding" fields={personalDetailsSchema.fields} draft={draft} />
+            <ReviewCard variant="organization" title="Organization & Role" editHref="/onboarding/organization" fields={organizationSchema.fields} draft={draft} />
+          </div>
+          <aside className="review-notice">
+            <img src="/images/exclamation_icon.svg" alt="" />
+            <p>By completing your registration, you will be able to access the NCM 2.0 MIS-MRV Portal with the selected role and permissions.</p>
+          </aside>
+          <div className="form-actions confirmation-actions">
+            <button className="btn-ghost" type="button" onClick={() => router.push("/onboarding/organization")} disabled={submitting}>Back</button>
+            <button className="btn-primary" type="button" onClick={completeOnboarding} disabled={submitting}>
+              {submitting ? "Completing…" : "Complete & Go to Dashboard"}
+              {submitting ? null : <ArrowRightIcon />}
+            </button>
+          </div>
+        </section>
       )}
     </OnboardingFrame>
   );
 }
 
-function ReviewCard({ title, editHref, fields, draft }: { title: string; editHref: string; fields: FormFieldSchema[]; draft: OnboardingDraft }) {
+function ReviewCard({ variant, title, editHref, fields, draft }: { variant: "personal" | "organization"; title: string; editHref: string; fields: FormFieldSchema[]; draft: OnboardingDraft }) {
   return (
-    <section className="form-card review-card">
-      <div className="review-head"><h2>{title}</h2><Link href={editHref}>Edit</Link></div>
+    <section className={`form-card review-card review-card-${variant}`}>
+      <div className="review-head"><h2>{title}</h2><Link className="review-edit" href={editHref}><img src="/images/Edit.svg" alt="" />Edit</Link></div>
       <dl>
         {fields.map((field) => (
           <div key={field.name}><dt>{field.label}</dt><dd>{displayValue(field, draft)}</dd></div>
@@ -176,4 +202,8 @@ function displayValue(field: FormFieldSchema, draft: OnboardingDraft) {
 
 function CheckIcon() {
   return <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.2 6.4 11l6.1-6.2" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /></svg>;
+}
+
+function ArrowRightIcon() {
+  return <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>;
 }
