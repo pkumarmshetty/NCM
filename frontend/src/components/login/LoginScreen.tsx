@@ -86,7 +86,7 @@ export function LoginScreen() {
     <main className="login">
       <img
         className="login-bg"
-        src="/images/coast.svg"
+        src="/images/loginbg.svg"
         alt=""
       />
       <div className="login-shade" />
@@ -94,15 +94,16 @@ export function LoginScreen() {
       <section className="login-layout">
         <div className="hero-copy">
           <div className="ministry">
-            <NationalEmblem className="emblem" />
-            <div>
+            <img src="/images/ministry of env.svg" alt="" />
+            {/* <NationalEmblem className="emblem" /> */}
+            {/* <div>
               <p className="ministry-name">
                 Ministry of Environment,
                 <br />
                 Forest and Climate Change
               </p>
               <p className="ministry-gov">Government of India</p>
-            </div>
+            </div> */}
           </div>
 
           <h1>
@@ -117,14 +118,15 @@ export function LoginScreen() {
           </p>
 
           <ul className="features">
-            {features.map(({ label, Icon }) => (
-              <li key={label}>
+            {/* {features.map(({ label, Icon }) => (
+              <li key={label}> */}
                 <span className="feature-icon">
-                  <Icon />
+                   <img src="/images/healthy_coast.svg" alt="" />
+                  {/* <Icon /> */}
                 </span>
-                <span>{label}</span>
+                {/* <span>{label}</span>
               </li>
-            ))}
+            ))} */}
           </ul>
         </div>
 
@@ -176,13 +178,14 @@ export function LoginScreen() {
             onClick={onDigiLocker}
             disabled={pending !== null}
           >
-            <DigiLockerIcon />
+            <img src="/images/DigiLocker.svg" alt="" />
+            {/* <DigiLockerIcon /> */}
             {pending === "digilocker" ? "Connecting…" : "Sign in with DigiLocker"}
           </button>
 
           <div className="notice">
             <span className="notice-icon" aria-hidden="true">
-              i
+              <img src="/images/exclamation_icon.svg" alt="" />
             </span>
             <p>
               This portal is accessible only to authorized users from MoEFCC,
