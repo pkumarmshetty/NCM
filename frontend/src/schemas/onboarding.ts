@@ -91,15 +91,6 @@ export const organizationSchema: FormSchema = {
       placeholder: "Select role",
       options: roles,
     },
-    {
-      name: "authorizationFile",
-      label: "Authorization letter",
-      type: "file",
-      required: true,
-      span: "full",
-      accept: ".pdf,.png,.jpg,.jpeg",
-      hint: "PDF, PNG or JPG. This file stays in your browser until the API is connected.",
-    },
   ],
 };
 
@@ -130,7 +121,6 @@ export const emptyDraft = (): OnboardingDraft => ({
   district: "",
   department: "",
   role: "",
-  authorizationFile: "",
   confirmed: "",
 });
 

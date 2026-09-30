@@ -17,7 +17,6 @@ export type OnboardingDraft = {
   district: string;
   department: string;
   role: string;
-  authorizationFile: string;
   confirmed: string;
 };
 

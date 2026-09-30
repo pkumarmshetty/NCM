@@ -116,7 +116,7 @@ function FieldControl({ field, form }: { field: FormFieldSchema; form: UseFormRe
         <div className="upload">
           <img src="/images/UploadSimple.svg" alt="" />
           <span>
-            <strong>{value || "Upload authorization letter"}</strong>
+            <strong>{value || "Upload file"}</strong>
             <small>Click to choose a file</small>
           </span>
           <input id={field.name} type="file" accept={field.accept} onChange={(event) => form.setValue(field.name, event.target.files?.[0]?.name ?? "", { shouldValidate: true })} />

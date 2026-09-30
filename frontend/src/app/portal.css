@@ -2,15 +2,17 @@
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0; }
 .portal-header { position: relative; min-height: 92px; overflow: hidden; border-bottom: 1px solid rgba(15, 61, 145, 0.08); }
 .portal-header-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 62%; }
-.portal-header-inner { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 92px; padding: 12px 28px; background: linear-gradient(90deg, rgba(255,255,255,.94) 0%, rgba(255,255,255,.78) 46%, rgba(255,255,255,.2) 100%); }
+.portal-header-inner { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 92px; padding: 12px 28px; }
 .brand-lockup, .header-tools, .brand-lockup > div { display: flex; align-items: center; }
 .brand-lockup { gap: 14px; min-width: 0; }
-.brand-emblem { width: 46px; height: auto; flex: none; }
+.brand-emblem { width: 170px; height: auto; flex: none; object-fit: contain; }
+.brand-lockup > .brand-copy { flex-direction: column; align-items: flex-start; }
 .brand-ministry, .brand-gov, .brand-mission, .brand-portal { margin: 0; }
 .brand-ministry { font-size: 13px; line-height: 1.2; font-weight: 800; }
 .brand-gov, .brand-portal { color: #4e6072; font-size: 12px; font-weight: 600; }
 .brand-rule { width: 1px; height: 42px; background: #c5d0dc; }
 .brand-mission { font-size: 16px; font-weight: 800; letter-spacing: -0.02em; }
+.brand-portal { margin-right: auto; }
 .header-tools { gap: 10px; flex: none; }
 .icon-btn, .lang-pill { height: 38px; border: 1px solid rgba(255,255,255,.8); border-radius: 10px; background: rgba(255,255,255,.92); color: #24384c; box-shadow: 0 4px 14px rgba(16,52,92,.08); }
 .icon-btn { width: 38px; display: grid; place-items: center; cursor: pointer; }
