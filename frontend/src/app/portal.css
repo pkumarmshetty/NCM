@@ -29,9 +29,11 @@
 .sidebar-label { margin: 0 10px 8px; color: #8b96a3; font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
 .sidebar nav { display: flex; flex-direction: column; gap: 4px; }
 .nav-link { display: flex; align-items: center; gap: 10px; min-height: 40px; padding: 0 12px; border-radius: 10px; color: #4d5b6a; text-decoration: none; font-size: 13.5px; font-weight: 600; }
-.nav-link.active, .nav-link:hover { background: #f3eeff; color: #4a2bc2; }
+.nav-link.active { background: rgba(0, 56, 154, 1); color: rgba(255, 255, 255, 1); }
+.nav-link:hover:not(.active) { background: #f3eeff; color: #4a2bc2; }
 .nav-ico { width: 18px; height: 18px; flex: none; background: #666; -webkit-mask: var(--ico) center / contain no-repeat; mask: var(--ico) center / contain no-repeat; }
-.nav-link.active .nav-ico, .nav-link:hover .nav-ico { background: #4a2bc2; }
+.nav-link.active .nav-ico { background: rgba(255, 255, 255, 1); }
+.nav-link:hover:not(.active) .nav-ico { background: #4a2bc2; }
 .sidebar-backdrop { display: none; }
 .portal-main, .onboard-main { padding: 28px 32px 48px; }
 .page-head h1, .onboard-top h1, .form-card h2, .panel h2 { margin: 0; color: var(--title); letter-spacing: -0.03em; }
