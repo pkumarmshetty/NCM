@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { CoastalMap } from "@/components/dashboard/DashboardScreen";
+import { CoastalMap } from "@/components/dashboard/CoastalMap";
 import { DataTable, Pagination } from "@/components/ui/DataTable";
 import { EmptyState, ErrorState, LoadingState, StatusBadge } from "@/components/ui/Feedback";
 import { states } from "@/data/options";
