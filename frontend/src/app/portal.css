@@ -150,4 +150,38 @@ th { color: #66788a; font-size: 12px; font-weight: 800; }
   .portal-main, .onboard-main, .portal-header-inner { padding-left: 16px; padding-right: 16px; }
   .kpi-grid, .dash-grid, .form-grid, .review-card dl, .filters { grid-template-columns: 1fr; }
   .page-head h1, .onboard-top h1 { font-size: 26px; }
+  .project-card { position: static; width: auto; margin: 12px; }
+  .figma-map { min-height: 640px; }
 }
+
+.figma-map { position: relative; height: 640px; border-radius: 16px; overflow: hidden; background: #0b3a66; }
+.map-panel { padding: 0; overflow: hidden; }
+.figma-map-canvas { position: absolute; inset: 0; z-index: 0; }
+.figma-map-canvas .leaflet-container { width: 100%; height: 100%; background: #0c4c86; font: inherit; }
+.map-pin, .map-label { background: transparent; border: 0; }
+.map-pin span { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; color: #fff; font-weight: 800; font-size: 13px; border: 3px solid #fff; box-shadow: 0 6px 14px rgba(0,0,0,.28); }
+.map-label span { color: #fff; font-size: 12px; font-weight: 700; text-shadow: 0 1px 2px rgba(0,0,0,.7); }
+.map-layers, .project-card { position: absolute; z-index: 500; background: #fff; border-radius: 16px; box-shadow: 0 12px 30px rgba(8, 28, 58, .22); }
+.map-layers { top: 16px; left: 16px; width: 230px; padding: 14px 14px 10px; }
+.map-layers h3, .project-body h3 { margin: 0 0 10px; font-size: 15px; }
+.map-layers label { display: flex; align-items: center; gap: 8px; margin: 7px 0; font-size: 13px; color: #24384c; }
+.map-layers input { accent-color: #1f9d55; width: 15px; height: 15px; }
+.map-layers button { margin-top: 6px; border: 0; background: transparent; color: #0f3d91; font-weight: 700; cursor: pointer; padding: 0; }
+.project-card { top: 16px; right: 16px; width: 320px; overflow: hidden; }
+.project-photo { position: relative; height: 92px; }
+.project-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 60%; }
+.project-photo span { position: absolute; top: 10px; right: 10px; background: #e8f7ef; color: #0f6b4c; border-radius: 999px; font-size: 12px; font-weight: 800; padding: 4px 8px; }
+.project-body { padding: 12px 14px 14px; }
+.project-body strong { display: block; font-size: 15px; }
+.project-id { margin: 2px 0 8px; color: #66788a; font-size: 12px; }
+.project-body dl { margin: 0; display: grid; gap: 6px; }
+.project-body dl div { display: grid; grid-template-columns: 118px 1fr; gap: 8px; font-size: 12.5px; }
+.project-body dt { color: #66788a; }
+.project-body dd { margin: 0; font-weight: 700; }
+.project-actions { display: flex; gap: 8px; margin-top: 12px; }
+.btn-primary.small, .btn-ghost.small { height: 34px; padding: 0 12px; font-size: 13px; text-decoration: none; }
+.chart-head select { height: 36px; border: 1px solid #d7dee6; border-radius: 8px; padding: 0 10px; background: #fff; }
+.pct-bars { grid-template-columns: 42px repeat(10, minmax(0, 1fr)); height: 260px; position: relative; }
+.bar-axis { display: flex; flex-direction: column; justify-content: space-between; height: calc(100% - 28px); color: #8b96a3; font-size: 11px; }
+.pct-bars .bar-track div { background: linear-gradient(#7ddea2, #1f9d55); position: relative; }
+.pct-bars .bar-track em { position: absolute; top: -28px; left: 50%; transform: translateX(-50%); background: #3a3a3a; color: #fff; border-radius: 999px; font-style: normal; font-size: 12px; padding: 3px 8px; font-weight: 700; }
