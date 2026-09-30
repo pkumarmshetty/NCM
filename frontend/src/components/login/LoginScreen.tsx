@@ -131,7 +131,12 @@ export function LoginScreen() {
         </div>
 
         <section className="login-card" aria-labelledby="portal-title">
-          <NcmLogo className="ncm-logo" />
+          <img
+            className="login-card-bg"
+            src="/images/NCM2.0.svg"
+            alt=""
+          />
+          {/* <NcmLogo className="ncm-logo" /> */}
           <h2 id="portal-title">NCM 2.0</h2>
           <p className="portal-name">National Coastal Mission</p>
           <p className="portal-sub">MIS-MRV Portal</p>

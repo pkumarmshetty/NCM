@@ -335,18 +335,9 @@ margin-right:auto;
 }
 
 .notice-icon {
-  flex: none;
-  width: 18px;
-  height: 18px;
-  margin-top: 1px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  background: #efe8fb;
-  color: var(--info);
-  font-size: 12px;
-  font-weight: 800;
-  font-family: Georgia, serif;
+  width: 20pxpx;
+  height:20px;
+  margin-block:auto;
 }
 
 @media (max-width: 1080px) {
