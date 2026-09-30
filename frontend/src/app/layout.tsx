@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import "./portal.css";
 
 const sans = Plus_Jakarta_Sans({
   subsets: ["latin"],

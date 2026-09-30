@@ -1,10 +1,10 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { useRouter } from "next/navigation";
 import { ApiError } from "@/lib/http/client";
 import { saveSession } from "@/lib/session";
 import { signInWithDigiLocker, signInWithIdentifier } from "@/services/auth.service";
-import type { AuthSession } from "@/types/auth";
 import {
   CleanerOceansIcon,
   DigiLockerIcon,
@@ -30,14 +30,13 @@ function isValidIdentifier(value: string) {
 }
 
 export function LoginScreen() {
+  const router = useRouter();
   const [identifier, setIdentifier] = useState("");
   const [error, setError] = useState("");
-  const [session, setSession] = useState<AuthSession | null>(null);
   const [pending, setPending] = useState<"continue" | "digilocker" | null>(null);
 
   async function onContinue(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setSession(null);
 
     if (!identifier.trim()) {
       setError("Enter your mobile number or email ID.");
@@ -53,7 +52,7 @@ export function LoginScreen() {
     try {
       const next = await signInWithIdentifier(identifier);
       saveSession(next);
-      setSession(next);
+      router.push(next.nextStep === "dashboard" ? "/dashboard" : "/onboarding");
     } catch (caught) {
       setError(
         caught instanceof ApiError
@@ -67,12 +66,11 @@ export function LoginScreen() {
 
   async function onDigiLocker() {
     setError("");
-    setSession(null);
     setPending("digilocker");
     try {
       const next = await signInWithDigiLocker();
       saveSession(next);
-      setSession(next);
+      router.push(next.nextStep === "dashboard" ? "/dashboard" : "/onboarding");
     } catch (caught) {
       setError(
         caught instanceof ApiError
@@ -181,13 +179,6 @@ export function LoginScreen() {
             <DigiLockerIcon />
             {pending === "digilocker" ? "Connecting…" : "Sign in with DigiLocker"}
           </button>
-
-          {session ? (
-            <p className="form-success" role="status">
-              Signed in as {session.name} ({session.organization}). Next step:{" "}
-              {session.nextStep}.
-            </p>
-          ) : null}
 
           <div className="notice">
             <span className="notice-icon" aria-hidden="true">
