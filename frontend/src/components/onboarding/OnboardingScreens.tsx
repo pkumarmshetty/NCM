@@ -36,7 +36,7 @@ function OnboardingFrame({ step, title, lede, children }: { step: number; title:
       <main className="onboard-main">
         <div className="onboard-top">
           <div>
-            <p className="eyebrow">User on-boarding</p>
+            <p className="eyebrow">USER ON-BOARDING</p>
             <h1>{title}</h1>
             <p className="lede">{lede}</p>
           </div>
